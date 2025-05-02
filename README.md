@@ -7,4 +7,4 @@ So far I included
 5. Anime Mega Battle
 6. Princess Mega Battle
 7. ⛏️ Dig to Earth's CORE!
-8. Merge Pets! 🐾
+8. Merge for DIAMONDS!
