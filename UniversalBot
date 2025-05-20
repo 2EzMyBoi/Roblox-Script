@@ -1,0 +1,157 @@
+local TextChatService = game:GetService("TextChatService")
+local TeleportService = game:GetService("TeleportService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = game.Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+
+local ToggleTP = false
+
+local function Send(Msg)
+    local channel = TextChatService.TextChannels:FindFirstChild("RBXGeneral") 
+    if channel then
+        channel:SendAsync(Msg)
+    end
+end
+
+local function Reset()
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end
+
+local function Rejoin()
+    if LocalPlayer then
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end
+end
+
+local function Leave()
+    game:Shutdown()
+end
+
+local function TP(TargetUser)
+    local TargetPlayer = Players:FindFirstChild(TargetUser)
+    if TargetPlayer and TargetPlayer.Character and TargetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = TargetPlayer.Character.HumanoidRootPart.CFrame
+    end
+end
+
+local function LoopTP(TargetUser)
+    task.spawn(function() 
+        while ToggleTP do
+            TP(TargetUser)
+            task.wait(0.1) 
+        end
+    end)
+end
+
+local function FlingTP(TargetUser)
+    task.spawn(function() 
+        local Duration = 5
+        local StartTime = tick() 
+
+        while tick() - StartTime < Duration do
+            TP(TargetUser) 
+            task.wait(0.1)
+        end
+    end)
+end
+
+local function Fling()
+    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+    local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+    local Offset = 0.1
+    local Duration = 5
+    local StartTime = tick()
+
+    Humanoid.Died:Connect(function() return end)
+
+    while Humanoid.Parent and tick() - StartTime < Duration do
+        RunService.Heartbeat:Wait()
+
+        if HumanoidRootPart.Parent then
+            local OriginalVelocity = HumanoidRootPart.Velocity
+            HumanoidRootPart.Velocity = OriginalVelocity * 2000 + Vector3.new(0, 10000, 0)
+            RunService.RenderStepped:Wait()
+            HumanoidRootPart.Velocity = OriginalVelocity
+            RunService.Stepped:Wait()
+            HumanoidRootPart.Velocity = OriginalVelocity + Vector3.new(0, Offset, 0)
+            Offset = Offset * -1
+        else
+            break
+        end
+    end
+end
+
+local commands = {
+    ["TP"] = function(TargettedUser)
+        local player = Players:FindFirstChild(TargettedUser)
+        if player then
+            TP(TargettedUser)
+            Send("Teleported!")
+        else
+            Send("Player Not Found")
+        end
+    end,
+
+    ["Fling"] = function(TargettedUser)
+        local player = Players:FindFirstChild(TargettedUser)
+        if player then
+            ToggleCollision(false)
+            FlingTP(TargettedUser)
+            Fling()
+            Reset()
+            Send("Flinged!")
+        else
+            Send("Player Not Found")
+        end
+    end,
+
+    ["LoopTP"] = function(TargettedUser)
+        local player = Players:FindFirstChild(TargettedUser)
+        if player then
+            ToggleTP = true
+            LoopTP(TargettedUser)
+            Send("Loop TP is On!")
+        else
+            Send("Player Not Found")
+        end
+    end,
+
+    ["UnLoopTP"] = function()
+        ToggleTP = false
+        Send("Loop TP is Off")
+    end,
+
+    ["Reset"] = function()
+        Reset()
+        Send("Action Done!")
+    end,
+
+    ["RJ"] = function()
+        Send("Rejoining...")
+        wait(0.25)
+        Rejoin()
+    end,
+
+    ["Leave"] = function()
+        Send("Leaving...")
+        wait(0.25)
+        Leave()
+    end,
+    
+}
+
+Send("Loaded!")
+wait(0.15)
+Send("Bot Owner: " .. Owner)
+
+TextChatService.MessageReceived:Connect(function(message)
+    if message.TextSource.Name == Owner then
+        local command, TargettedUser = message.Text:match("!(%S+)%s*(%S*)")
+
+        if commands[command] then
+            commands[command](TargettedUser ~= "" and TargettedUser or nil)
+        end
+    end
+end)
