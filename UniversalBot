@@ -46,7 +46,7 @@ end
 
 local function FlingTP(TargetUser)
     task.spawn(function() 
-        local Duration = 5
+        local Duration = 10
         local StartTime = tick() 
 
         while tick() - StartTime < Duration do
@@ -61,7 +61,7 @@ local function Fling()
     local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
     local Humanoid = Character:FindFirstChildOfClass("Humanoid")
     local Offset = 0.1
-    local Duration = 5
+    local Duration = 10
     local StartTime = tick()
 
     Humanoid.Died:Connect(function() return end)
@@ -71,7 +71,7 @@ local function Fling()
 
         if HumanoidRootPart.Parent then
             local OriginalVelocity = HumanoidRootPart.Velocity
-            HumanoidRootPart.Velocity = OriginalVelocity * 2000 + Vector3.new(0, 10000, 0)
+            HumanoidRootPart.Velocity = OriginalVelocity * 7500 + Vector3.new(0, 10000, 0)
             RunService.RenderStepped:Wait()
             HumanoidRootPart.Velocity = OriginalVelocity
             RunService.Stepped:Wait()
