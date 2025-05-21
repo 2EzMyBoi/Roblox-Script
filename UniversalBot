@@ -97,7 +97,6 @@ local commands = {
     ["Fling"] = function(TargettedUser)
         local player = Players:FindFirstChild(TargettedUser)
         if player then
-            ToggleCollision(false)
             FlingTP(TargettedUser)
             Fling()
             Reset()
