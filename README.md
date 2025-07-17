@@ -10,4 +10,4 @@ So far I included
 8. ⛏️ Dig to Earth's CORE!
 9. Merge for DIAMONDS!
 10. Off Schedule
-11. GAG Price Changer
+11. Steal A Brainrot
