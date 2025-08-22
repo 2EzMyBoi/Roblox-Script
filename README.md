@@ -1,13 +1,14 @@
 My Lua Script
 So far I included
-1. Universal Bot
-2. +1,000 Damage Every Second
-3. Color Game! 🎨
-4. Wait For 1 Year
-5. SuperHero Mega Battle
-6. Anime Mega Battle
-7. Princess Mega Battle
-8. ⛏️ Dig to Earth's CORE!
-9. Merge for DIAMONDS!
-10. Off Schedule
-11. Steal A Brainrot
+1. Useless Bypasser
+2. Universal Bot
+3. +1,000 Damage Every Second
+4. Color Game! 🎨
+5. Wait For 1 Year
+6. SuperHero Mega Battle
+7. Anime Mega Battle
+8. Princess Mega Battle
+9. ⛏️ Dig to Earth's CORE!
+10. Merge for DIAMONDS!
+11. Off Schedule
+12. Steal A Brainrot
