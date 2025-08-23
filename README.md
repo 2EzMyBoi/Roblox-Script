@@ -1,6 +1,6 @@
 My Lua Script
 So far I included
-1. Useless Bypasser
+1. Useless Bypasser [Open Sourced]
 2. Universal Bot
 3. +1,000 Damage Every Second
 4. Color Game! 🎨
