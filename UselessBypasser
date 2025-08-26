@@ -132,7 +132,7 @@ local CopyButton = OthersTab:CreateButton({
 local Discord = OthersTab:CreateButton({
    Name = "Copy Discord Invite",
    Callback = function()
-        setclipboard("discord.gg/SpJxgWUy8E")
+        setclipboard("https://discord.gg/Q9zpPAUBVG")
    end,
 })
 
