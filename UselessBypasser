@@ -57,7 +57,7 @@ local ServiceLabel = MainTab:CreateLabel("Detecting ChatService..", nil, Color3.
 if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
     ServiceLabel:Set("Game is using TextChatService.", nil, Color3.fromRGB(0, 0, 0), false)
 elseif TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService then
-    ServiceLabel:Set("Game is using LegacyChatService ", nil, Color3.fromRGB(0, 0, 0), false)
+    ServiceLabel:Set("Game is using LegacyChatService.", nil, Color3.fromRGB(0, 0, 0), false)
 else
     ServiceLabel:Set("Error: Could Not find ChatService [Script Should Still Work]", nil, Color3.fromRGB(0, 0, 0), false)
 end
