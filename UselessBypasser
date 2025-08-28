@@ -12,6 +12,35 @@ Method = "None"
 Bypass = ""
 UnBypassedString = ""
 
+local CharacterMap = {
+    a="ส", A="ส",
+    b="ხ", B="ხ",
+    c="ϲ", C="ϲ",
+    d="d", D="d",
+    e="e", E="e",
+    f="f", F="f",
+    g="g", G="g",
+    h="h", H="h",
+    i="เ่", I="เ่",
+    j="j", J="j",
+    k="ҟ", K="ҟ",
+    l="Ɩ", L="Ɩ",
+    m="m", M="m",
+    n="ถ", N="ถ",
+    o="ჿ", O="ჿ",
+    p="p", P="p",
+    q="Q", Q="Q",
+    r="ꞅ", R="ꞅ",
+    s="ธ", S="ธ",
+    t="t", T="t",
+    u="ม", U="ม",
+    v="V", V="V",
+    w="w", W="w",
+    x="x", X="x",
+    y="у", Y="у",
+    z="Z", Z="Z"
+}
+
 local Window = Rayfield:CreateWindow({
    Name = "Useless Bypasser",
    Icon = 0, 
@@ -81,6 +110,15 @@ local CommaMethod = MainTab:CreateButton({
     end,
 })
 
+local FontMethod = MainTab:CreateButton({
+    Name = "Set Bypass Method To: Font Method [BETA]",
+    Callback = function()
+        Method = "Font"
+        BypassFunction(UnBypassedString)
+        MethodLabel:Set("Selected Bypass Method: Font Method [BETA]", nil, Color3.fromRGB(0, 0, 0), false) 
+    end,
+})
+
 local MainSection = MainTab:CreateSection("Bypass")
 local UnBypassInput = MainTab:CreateLabel("UnBypassed Input: None", nil, Color3.fromRGB(0, 0, 0), false)
 local BypassOutput = MainTab:CreateLabel("Bypass Output: None", nil, Color3.fromRGB(0, 0, 0), false)
@@ -143,7 +181,7 @@ local UnLoad = OthersTab:CreateButton({
    end,
 })
 
---------------------------------------------------------------------------------
+-- // --------------------------------------------------
 
 function BypassFunction(UnBypassed)
     if Method == "None" then
@@ -157,8 +195,8 @@ function BypassFunction(UnBypassed)
         local Tricker = "™"
         Bypass = ""
 
-        for i = 1, #UnBypassed do
-            local Letter = string.sub(UnBypassed, i, i)
+        for Count = 1, #UnBypassed do
+            local Letter = string.sub(UnBypassed, Count, Count)
             Bypass = Bypass .. Letter .. Tricker
         end
                 
@@ -178,9 +216,16 @@ function BypassFunction(UnBypassed)
         local Reversed = string.reverse(UnBypassed)
         Bypass = ""
         
-        for i = 1, #Reversed do
-            local Letter = string.sub(Reversed, i, i)
+        for Count = 1, #Reversed do
+            local Letter = string.sub(Reversed, Count, Count)
             Bypass = Bypass .. Tricker .. Letter
+        end
+        BypassOutput:Set("Bypass Output: " .. tostring(Bypass), nil, Color3.fromRGB(0, 0, 0), false)
+    elseif Method == "Font" then
+        Bypass = ""
+        for Count = 1, #UnBypassed do
+            local Character = UnBypassed:sub(Count, Count)
+            Bypass = Bypass .. (CharacterMap[Character] or Character)
         end
         BypassOutput:Set("Bypass Output: " .. tostring(Bypass), nil, Color3.fromRGB(0, 0, 0), false)
     end
