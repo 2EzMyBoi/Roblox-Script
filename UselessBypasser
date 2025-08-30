@@ -12,7 +12,7 @@ Method = "None"
 Bypass = ""
 UnBypassedString = ""
 
-local CharacterMap = {
+local WaterXJuice = {
     a="ส", A="ส",
     b="ხ", B="ხ",
     c="ϲ", C="ϲ",
@@ -39,6 +39,35 @@ local CharacterMap = {
     x="x", X="x",
     y="у", Y="у",
     z="Z", Z="Z"
+}
+
+local AxurBypasser = {
+    a = "ส", A = "ส",
+    b = "ხ", B = "ხ",
+    c = "ϲׁׅ", C = "ϲׁׅ",
+    d = "Ԁׁׁׅ", D = "Ԁׁׁׅ",
+    e = "ҿׁׅ", E = "ҿׁׅ",
+    f = "ƭׁׅ", F = "ƭׁׅ",
+    g = "ԍׁׅ", G = "ԍׁׅ",
+    h = "ꜧׁׅ", H = "ꜧׁׅ",
+    i = "เ่", I = "เ่",
+    j = "ៗ", J = "ៗ",
+    k = "ҟׁׅ", K = "ҟׁׅ",
+    l = "Ɩׁׅ", L = "Ɩׁׅ",
+    m = "ӎׁׅ", M = "ӎׁׅ",
+    n = "ถ", N = "ถ",
+    o = "ठ", O = "ठ",
+    p = "ƿׁׁׅ", P = "ƿׁׁׅ",
+    q = "ԛׁׅ", Q = "ԛׁׅ",
+    r = "ꞅׁׅ", R = "ꞅׁׅ",
+    s = "ऽ", S = "ऽ",
+    t = "τׁׅ", T = "τׁׅ",
+    u = "ม", U = "ม",
+    v = "ѵׁׁׅׅ", V = "ѵׁׁׅׅ",
+    w = "ѡ", W = "ѡ",
+    x = "Χׁׁׅׅ", X = "Χׁׁׅׅ",
+    y = "ឫ", Y = "ឫ",
+    z = "Ⴭ", Z = "Ⴭ"
 }
 
 local Window = Rayfield:CreateWindow({
@@ -110,12 +139,21 @@ local CommaMethod = MainTab:CreateButton({
     end,
 })
 
-local FontMethod = MainTab:CreateButton({
-    Name = "Set Bypass Method To: Font Method [BETA]",
+local WaterXJuiceMethod = MainTab:CreateButton({
+    Name = "Set Bypass Method To: WaterXJuice Method",
     Callback = function()
-        Method = "Font"
+        Method = "WaterXJuice"
         BypassFunction(UnBypassedString)
-        MethodLabel:Set("Selected Bypass Method: Font Method [BETA]", nil, Color3.fromRGB(0, 0, 0), false) 
+        MethodLabel:Set("Selected Bypass Method: WaterXJuice Method", nil, Color3.fromRGB(0, 0, 0), false) 
+    end,
+})
+
+local AxurBypasserMethod = MainTab:CreateButton({
+    Name = "Set Bypass Method To: Axur Bypasser Method",
+    Callback = function()
+        Method = "AxurBypasser"
+        BypassFunction(UnBypassedString)
+        MethodLabel:Set("Selected Bypass Method: Axur Bypasser Method", nil, Color3.fromRGB(0, 0, 0), false) 
     end,
 })
 
@@ -221,11 +259,18 @@ function BypassFunction(UnBypassed)
             Bypass = Bypass .. Tricker .. Letter
         end
         BypassOutput:Set("Bypass Output: " .. tostring(Bypass), nil, Color3.fromRGB(0, 0, 0), false)
-    elseif Method == "Font" then
+    elseif Method == "WaterXJuice" then
         Bypass = ""
         for Count = 1, #UnBypassed do
             local Character = UnBypassed:sub(Count, Count)
-            Bypass = Bypass .. (CharacterMap[Character] or Character)
+            Bypass = Bypass .. (WaterXJuice[Character] or Character)
+        end
+        BypassOutput:Set("Bypass Output: " .. tostring(Bypass), nil, Color3.fromRGB(0, 0, 0), false)
+    elseif Method == "AxurBypasser" then
+        Bypass = ""
+        for Count = 1, #UnBypassed do
+            local Character = UnBypassed:sub(Count, Count)
+            Bypass = Bypass .. (AxurBypasser[Character] or Character)
         end
         BypassOutput:Set("Bypass Output: " .. tostring(Bypass), nil, Color3.fromRGB(0, 0, 0), false)
     end
